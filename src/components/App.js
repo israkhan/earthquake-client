@@ -2,11 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Login from "./auth/Login";
+import SearchBar from "./earthquake/SearchBar";
 
-function App() {
+function App(props) {
+  // return (
+  //   <h1 className="App">{props.isLoggedIn ? <SearchBar /> : <Login />}</h1>
+  // );
+
   return (
     <h1 className="App">
-      <Login />
+      <SearchBar />
     </h1>
   );
 }

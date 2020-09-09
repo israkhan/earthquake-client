@@ -26,7 +26,6 @@ const Login = (props) => {
         <Typography variant="h2">Earthquake Tracker</Typography>
         <Grid item>
           <TextField
-            id="email"
             label="Email"
             value={email}
             margin="normal"
@@ -35,7 +34,6 @@ const Login = (props) => {
         </Grid>
         <Grid item>
           <TextField
-            id="password"
             label="Password"
             value={password}
             margin="normal"

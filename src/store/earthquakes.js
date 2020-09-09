@@ -26,7 +26,7 @@ export const getSearchResult = (location, radius, start, end) => async (
 ) => {
   try {
     const response = axios(
-      `/api/earthquakes/search?location=${location}&raidus=${radius}&startDate=${start}&endDate=${end}`
+      `/api/earthquakes/?location=${location}&radius=${radius}&startDate=${start}&endDate=${end}`
     );
 
     dispatch(SET_EARTHQUAKE_SEARCH_RESULT(response.data));
