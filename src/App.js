@@ -1,10 +1,11 @@
 import React from "react";
-import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+require("dotenv").config();
 
 function App() {
   return (
     <h1 className="App">
-      <Login />
+      <SignUp />
     </h1>
   );
 }
