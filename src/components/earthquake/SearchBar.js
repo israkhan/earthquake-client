@@ -1,28 +1,20 @@
 import React, { useState } from "react";
-import {
-  Grid,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 
+import { getSearchResult } from "../../store/earthquakes";
+
 const SearchBar = (props) => {
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("Los Angeles, California");
   const [radius, setRadius] = useState(20);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState("08/31/2020");
+  const [endDate, setEndDate] = useState("09/01/2020");
+
+  const handleSearch = () => props.search(location, radius, startDate, endDate);
 
   return (
-    <Grid
-      container
-      direction="column"
-      alignContent="center"
-      justify="center"
-      style={{ minHeight: "80vh" }}
-    >
-      <Grid item>
+    <div>
+      <div>
         <TextField
           label="Location"
           value={location}
@@ -35,8 +27,8 @@ const SearchBar = (props) => {
           onChange={(event) => setRadius(event.target.value)}
           xs={4}
         />
-      </Grid>
-      <Grid item>
+      </div>
+      <div>
         <TextField
           label="Start Date"
           value={startDate}
@@ -47,13 +39,24 @@ const SearchBar = (props) => {
           value={endDate}
           onChange={(event) => setEndDate(event.target.value)}
         />
-      </Grid>
-    </Grid>
+      </div>
+      <div>
+        <Button
+          variant="contained"
+          color="primary"
+          margin="normal"
+          onClick={async () => await handleSearch()}
+        >
+          Search
+        </Button>
+      </div>
+    </div>
   );
 };
 
-const mapState = (state) => ({});
+const mapDispatch = (dispatch) => ({
+  search: (location, radius, start, end) =>
+    dispatch(getSearchResult(location, radius, start, end)),
+});
 
-const mapDispatch = (dispatch) => ({});
-
-export default connect(mapState, mapDispatch)(SearchBar);
+export default connect(null, mapDispatch)(SearchBar);

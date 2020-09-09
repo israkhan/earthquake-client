@@ -8,7 +8,9 @@ const SET_EARTHQUAKE_SEARCH_RESULT = "SET_EARTHQUAKE_SEARCH_RESULT";
 /**
  * INITIAL STATE
  */
-const defaultState = [];
+const defaultState = {
+  earthquakes: [],
+};
 
 /**
  * ACTION CREATORS
@@ -25,11 +27,11 @@ export const getSearchResult = (location, radius, start, end) => async (
   dispatch
 ) => {
   try {
-    const response = axios(
+    const response = await axios(
       `/api/earthquakes/?location=${location}&radius=${radius}&startDate=${start}&endDate=${end}`
     );
 
-    dispatch(SET_EARTHQUAKE_SEARCH_RESULT(response.data));
+    dispatch(setEarthquakeSearchResult(response.data));
   } catch (err) {
     console.error(err);
     // dispatch(setQueryError(err.message));
@@ -42,7 +44,7 @@ export const getSearchResult = (location, radius, start, end) => async (
 export default function (state = defaultState, action) {
   switch (action.type) {
     case SET_EARTHQUAKE_SEARCH_RESULT:
-      return action.earthquakes;
+      return { earthquakes: action.earthquakes };
     default:
       return state;
   }
