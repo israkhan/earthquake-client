@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Grid, Button, TextField } from "@material-ui/core";
-import axios from "axios";
-import { auth } from "../firebase";
+import { Grid, Button, TextField, Typography } from "@material-ui/core";
+import { connect } from "react-redux";
+
+import { getUser } from "../store/user";
+import { signUp, signIn } from "../store/auth";
 
 const SignUp = (props) => {
   const [email, setEmail] = useState("");
@@ -10,43 +12,27 @@ const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  // axios.defaults.baseURL =
-  //   "https://us-central1-earthquake-notification-59115.cloudfunctions.net/app";
-  const handleSubmit = async () => {
-    try {
-      console.log("here");
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await axios.post("/api/users/", {
-        uid: user.uid,
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-      });
-      await auth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      // ...
-    }
+  const handleSubmit = () => {
+    props.signUp(email, password);
+    props.createUser({
+      uid: props.uid,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+    });
+    props.signIn(email, password);
   };
 
   return (
     <Grid
-      component="span"
-      m={1}
       container
-      spacing={2}
-      alignItems="center"
       direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: "80vh" }}
     >
-      {/* <form noValidate autoComplete="off"> */}
-      <div>Earthquake Tracker</div>
+      <Typography variant="h2">Earthquake Tracker</Typography>
       <div>
         <Grid item>
           <TextField
@@ -100,14 +86,28 @@ const SignUp = (props) => {
           variant="contained"
           color="primary"
           onClick={async () => await handleSubmit()}
-          margin="normal"
         >
           Submit
         </Button>
       </Grid>
-      {/* </form> */}
+      <Grid item>
+        {props.signUpError && (
+          <Typography variant="body1">{props.signUpError}</Typography>
+        )}
+      </Grid>
     </Grid>
   );
 };
 
-export default SignUp;
+const mapState = (state) => ({
+  uid: state.auth.uid,
+  signUpError: state.auth.signUpError,
+});
+
+const mapDispatch = (dispatch) => ({
+  createUser: (user) => dispatch(getUser(user)),
+  signUp: (email, password) => dispatch(signUp(email, password)),
+  signIn: (email, password) => dispatch(signIn(email, password)),
+});
+
+export default connect(mapState, mapDispatch)(SignUp);

@@ -1,54 +1,75 @@
 import React, { useState } from "react";
-import { Box, Button, TextField } from "@material-ui/core";
-import Axios from "axios";
-import firebase from "../firebase";
+import { Grid, Button, TextField, Typography } from "@material-ui/core";
+import { connect } from "react-redux";
+
+import { getUser } from "../store/user";
+import { signIn } from "../store/auth";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e, p) => {
-    try {
-      const user = await firebase.auth().signInWithEmailAndPassword(e, p);
-      console.log(user);
-      // await Axios.get(`/api/users/${firebase.currentUser.id}`);
-    } catch (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    }
+  const handleSignIn = () => {
+    props.signIn(email, password);
+    props.fetchUser(props.uid);
   };
 
   return (
-    <Box component="span" m={1}>
-      <form noValidate autoComplete="off" name="signUp">
-        <TextField
-          id="email"
-          label="Email"
-          value={email}
-          onChange={(val) => {
-            console.log(val);
-            return setEmail(val);
-          }}
-        />
-
-        <TextField
-          id="password"
-          label="Password"
-          value={password}
-          onChange={(val) => setPassword(val)}
-        />
-      </form>
-      <Button
-        variant="contained"
-        color="primary"
-        onSubmit={() => handleSubmit(email, password)}
+    <div>
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "80vh" }}
       >
-        Submit
-      </Button>
-    </Box>
+        <Typography variant="h2">Earthquake Tracker</Typography>
+        <Grid item>
+          <TextField
+            id="email"
+            label="Email"
+            value={email}
+            margin="normal"
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            id="password"
+            label="Password"
+            value={password}
+            margin="normal"
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            margin="normal"
+            onClick={async () => await handleSignIn()}
+          >
+            Submit
+          </Button>
+        </Grid>
+        <Grid item>
+          {props.signInError && (
+            <Typography variant="body1">{props.signInError}</Typography>
+          )}
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 
-export default Login;
+const mapState = (state) => ({
+  uid: state.auth.uid,
+  signInError: state.auth.signInError,
+});
+
+const mapDispatch = (dispatch) => ({
+  fetchUser: (uid) => dispatch(getUser(uid)),
+  signIn: (email, password) => dispatch(signIn(email, password)),
+});
+
+export default connect(mapState, mapDispatch)(Login);
