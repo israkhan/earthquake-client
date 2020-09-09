@@ -10,7 +10,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles({
   header: {
-    backgroundColor: "#7C98B3",
+    backgroundColor: "#536B78",
     color: "white",
     boxShadow: "0px 0px 0px 0px",
   },
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 export default function NavBar() {
   const classes = useStyles();
   return (
-    <AppBar position="sticky" className={classes.header}>
+    <AppBar position="absolute" className={classes.header}>
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
           Earthquake Tracker

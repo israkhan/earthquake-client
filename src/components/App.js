@@ -14,7 +14,9 @@ function App(props) {
   return (
     <div className="App">
       <NavBar />
-      <EarthquakeSearchScreen />
+      <div style={{ marginTop: "65px" }}>
+        <EarthquakeSearchScreen />
+      </div>
     </div>
   );
 }
