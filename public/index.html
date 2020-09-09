@@ -7,6 +7,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
     />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css"
+    />
   </head>
   <body>
     <meta
@@ -15,6 +19,12 @@
     />
     <meta name="google-signin-cookiepolicy" content="single_host_origin" />
     <meta name="google-signin-scope" content="profile email" />
-    <div id="root"></div>
+    <style>
+      .leaflet-container {
+        height: 100vh;
+        width: 150vh;
+      }
+    </style>
+    <div id="root" style="margin: 0"></div>
   </body>
 </html>
