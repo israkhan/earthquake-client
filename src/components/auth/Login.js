@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Grid, Button, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 
-import { getUser } from "../store/user";
-import { signIn } from "../store/auth";
+import { getUser } from "../../store/user";
+import { signIn } from "../../store/auth";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
