@@ -5,10 +5,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import user from "./user";
 import auth from "./auth";
+import earthquakes from "./earthquakes";
 
 const reducer = combineReducers({
   user,
   auth,
+  earthquakes,
 });
 
 const middleware = composeWithDevTools(

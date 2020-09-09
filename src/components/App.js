@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import Login from "./auth/Login";
+import EarthquakeSearchScreen from "./earthquake/EarthquakeSearchScreen";
 
-import Login from "./Login";
-
-function App() {
+function App(props) {
   return (
     <h1 className="App">
-      <Login />
+      {props.isLoggedIn ? <EarthquakeSearchScreen /> : <Login />}
     </h1>
   );
 }

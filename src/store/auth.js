@@ -57,7 +57,11 @@ export const signUp = (email, password) => async (dispatch) => {
 export default function (state = defaultState, action) {
   switch (action.type) {
     case SET_AUTH_CONFIRMATION:
-      return action.isLoggedIn;
+      return {
+        ...state,
+        isLoggedIn: action.authDetails.isLoggedIn,
+        uid: action.authDetails.uid,
+      };
     case SET_SIGN_IN_ERROR:
       return { ...state, signInError: action.message };
     case SET_SIGN_UP_ERROR:
