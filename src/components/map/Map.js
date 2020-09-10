@@ -1,7 +1,8 @@
 import React from "react";
-import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
+import { Map as LeafletMap, TileLayer } from "react-leaflet";
 import { connect } from "react-redux";
 import { Typography } from "@material-ui/core";
+import Marker from "./Marker";
 
 const Map = (props) => {
   return (
@@ -18,21 +19,9 @@ const Map = (props) => {
       easeLinearity={0.35}
     >
       <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
-      {props.earthquakes.map((obj) => {
-        const [, location] = obj.properties.place.split("of ");
-        return (
-          <Marker position={[obj.properties.lat, obj.properties.lng]}>
-            <Popup>
-              <Typography variant="h6">{location}</Typography>
-              <Typography variant="body2">
-                Magnitude: {obj.properties.mag}
-                <br />
-                Total Reports: {obj.properties.reports}
-              </Typography>
-            </Popup>
-          </Marker>
-        );
-      })}{" "}
+      {props.earthquakes.map((obj) => (
+        <Marker key={obj.id} quake={obj} />
+      ))}
     </LeafletMap>
   );
 };
