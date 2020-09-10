@@ -24,10 +24,10 @@ const radiusOptions = [
 ];
 
 const SearchBar = (props) => {
-  const [location, setLocation] = useState("Los Angeles, California");
+  const [location, setLocation] = useState("");
   const [radius, setRadius] = useState(25);
-  const [startDate, setStartDate] = useState("08/31/2020");
-  const [endDate, setEndDate] = useState("09/01/2020");
+  const [startDate, setStartDate] = useState("MM/DD/YYYY");
+  const [endDate, setEndDate] = useState("MM/DD/YYYY");
 
   //TODO cache search query + results from lng lat conversions and reuse for handleSubscription
   const handleSearch = () => {
