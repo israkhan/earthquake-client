@@ -1,12 +1,15 @@
 import React from "react";
-import { Map as LeafletMap, TileLayer } from "react-leaflet";
+import { Map as LeafletMap, TileLayer, LatLng } from "react-leaflet";
 import { connect } from "react-redux";
 import Marker from "./Marker";
 
 const Map = (props) => {
+  const lat = Math.round(props.geoCode.lat) || 50;
+  const lng = Math.round(props.geoCode.lng) || 10;
+  const position = [lat, lng];
   return (
     <LeafletMap
-      center={[50, 10]}
+      center={position}
       zoom={4}
       maxZoom={10}
       minZoom={4}
@@ -27,6 +30,7 @@ const Map = (props) => {
 
 const mapState = (state) => ({
   earthquakes: state.earthquakes.earthquakes,
+  geoCode: state.earthquakes.queryGeoCode,
 });
 
 export default connect(mapState)(Map);
