@@ -2,7 +2,7 @@ import React from "react";
 
 import { EarthquakeList, SearchBar, Map } from "../";
 
-const EarthquakeSearchScreen = (props) => {
+const EarthquakeSearchScreen = () => {
   return (
     <div style={{ display: "flex", justifyContent: "space-around" }}>
       <div
