@@ -50,8 +50,8 @@ const statusOptions = [
 
 function AddReportModal(props) {
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState("safe");
@@ -73,6 +73,7 @@ function AddReportModal(props) {
       phoneNumber,
       quakeId: props.quakeId,
     });
+    setOpen(false);
   };
 
   const body = (
@@ -138,12 +139,7 @@ function AddReportModal(props) {
       <Button onClick={handleOpen} size="small">
         Add Report
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
+      <Modal open={open} onClose={handleClose}>
         {body}
       </Modal>
     </div>
