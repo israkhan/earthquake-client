@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
 import EarthquakeList from "./earthquake/EarthquakeList";
 import SearchBar from "./earthquake/SearchBar";
 import Map from "./map/Map";
