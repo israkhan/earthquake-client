@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import EarthquakeSearchScreen from "./earthquake/EarthquakeSearchScreen";
-import NavBar from "./NavBar";
-import { getUser } from "../store/user";
+
+import { NavBar, EarthquakeSearchScreen } from "./";
+import { getUser } from "../store";
 
 function Home(props) {
   const fetchData = async () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Route from "../Routes";
+import Route from "./Routes";
 
 function App(props) {
   return (

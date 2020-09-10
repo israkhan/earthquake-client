@@ -1,6 +1,6 @@
 import React from "react";
-import { Marker as LeafletMarker, Popup } from "react-leaflet";
 import { Typography } from "@material-ui/core";
+import { Marker as LeafletMarker, Popup } from "react-leaflet";
 
 const Marker = (props) => {
   const earthProps = props.quake.properties;

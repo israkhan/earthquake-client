@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Button, MenuItem, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
+import { Button, MenuItem, TextField } from "@material-ui/core";
 
-import { getSearchResult } from "../../store/earthquakes";
-import { createSubscription } from "../../store/subscription";
+import { getSearchResult, createSubscription } from "../../store";
 
 const radiusOptions = [
   {

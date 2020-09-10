@@ -38,11 +38,9 @@ export const getSearchResult = (location, radius, start, end) => async (
     const response = await axios.get(
       `/api/earthquakes/?location=${location}&radius=${radius}&startDate=${start}&endDate=${end}`
     );
-
     const data = response.data;
-    console.log("DATA", data);
-    dispatch(setEarthquakeSearchResult(data));
 
+    dispatch(setEarthquakeSearchResult(data));
     data.earthquakes.forEach(async (quake) => {
       await axios.post(`/api/earthquakes/`, quake);
     });

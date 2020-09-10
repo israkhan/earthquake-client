@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
 import {
   Table,
   TableBody,
@@ -9,6 +8,7 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core";
+import { connect } from "react-redux";
 
 import { getReports } from "../../store";
 

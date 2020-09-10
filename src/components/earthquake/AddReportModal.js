@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  Typography,
+  TextField,
+  MenuItem,
+  Modal,
+  Button,
+  makeStyles,
+} from "@material-ui/core";
 import { connect } from "react-redux";
-import Modal from "@material-ui/core/Modal";
-import { Typography, TextField, MenuItem, Button } from "@material-ui/core";
 
 import { createReport } from "../../store";
 

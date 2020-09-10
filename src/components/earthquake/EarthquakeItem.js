@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import AddReportModal from "./AddReportModal";
+import { AddReportModal } from "../";
 
 const EarthquakeItem = (props) => {
   const earthProps = props.quake.properties;

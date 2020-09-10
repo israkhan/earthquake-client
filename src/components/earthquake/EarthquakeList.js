@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import EarthquakeItem from "./EarthquakeItem";
+import { EarthquakeItem } from "../";
 
 const EarthquakeList = (props) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(4);
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {props.earthquakes.map((quake) => (

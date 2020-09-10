@@ -1,7 +1,8 @@
 import React from "react";
-import { Map as LeafletMap, TileLayer, LatLng } from "react-leaflet";
 import { connect } from "react-redux";
-import Marker from "./Marker";
+import { Map as LeafletMap, TileLayer } from "react-leaflet";
+
+import { Marker } from "../";
 
 const Map = (props) => {
   const lat = Math.round(props.geoCode.lat) || 50;

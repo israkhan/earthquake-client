@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Grid, Button, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { Grid, Button, TextField, Typography } from "@material-ui/core";
+
 import { signIn } from "../../store";
 
 const Login = (props) => {

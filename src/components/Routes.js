@@ -7,10 +7,7 @@ import {
   withRouter,
 } from "react-router-dom";
 
-import SignUp from "./components/auth/SignUp";
-import Login from "./components/auth/Login";
-import Home from "./components/Home";
-import EarthquakeDetail from "./components/earthquake/EarthquakeDetails";
+import { SignUp, Login, Home, EarthquakeDetails } from "./";
 
 const Routes = (props) => {
   const isLoggedIn = props.isLoggedIn;
@@ -25,7 +22,7 @@ const Routes = (props) => {
       )}
       {isLoggedIn && (
         <Switch>
-          <Route exact path="/earthquakes/:id" component={EarthquakeDetail} />
+          <Route exact path="/earthquakes/:id" component={EarthquakeDetails} />
           <Route path="/" component={Home} />
         </Switch>
       )}
