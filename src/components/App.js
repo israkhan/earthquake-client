@@ -1,9 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import Route from "./Routes";
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <Route />
@@ -11,8 +10,4 @@ function App(props) {
   );
 }
 
-const mapState = (state) => ({
-  isLoggedIn: state.auth.isLoggedIn,
-});
-
-export default connect(mapState)(App);
+export default App;

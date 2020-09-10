@@ -9,7 +9,7 @@ import earthquakes from "./earthquakes";
 import subscription from "./subscription";
 import reports from "./reports";
 
-const reducer = combineReducers({
+export const reducer = combineReducers({
   user,
   auth,
   earthquakes,

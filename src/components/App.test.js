@@ -1,9 +1,16 @@
+/* eslint-disable no-unused-expressions */
+import setupTest from "./../setupTests";
+import enzyme, { shallow } from "enzyme";
 import React from "react";
-import { render } from "@testing-library/react";
-import { App } from "./";
+import Adapter from "enzyme-adapter-react-16";
+import App from "./App";
+import Routes from "./Routes";
 
-test("renders learn react link", () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+enzyme.configure({ adapter: new Adapter() });
+
+describe("App", () => {
+  it("contains Route component", () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.contains(<Routes />)).toEqual(true);
+  });
 });

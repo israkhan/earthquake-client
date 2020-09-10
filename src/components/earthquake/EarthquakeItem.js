@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 import {
   Button,
@@ -11,6 +12,14 @@ import {
 import { AddReportModal } from "../";
 
 const EarthquakeItem = (props) => {
+  const storeQuake = async () => {
+    await axios.post(`/api/earthquakes/`, props.quake);
+  };
+
+  useEffect(() => {
+    storeQuake();
+  }, []);
+
   const earthProps = props.quake.properties;
   const time = new Date(earthProps.time).toDateString();
   const [, location] = earthProps.place.split("of ");
