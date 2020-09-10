@@ -1,5 +1,5 @@
 import { auth } from "../firebase";
-
+import axios from "axios";
 /**
  * ACTION TYPES
  */
@@ -42,9 +42,25 @@ export const signIn = (email, password) => async (dispatch) => {
   }
 };
 
-export const signUp = (email, password) => async (dispatch) => {
+export const signUp = (
+  email,
+  password,
+  firstName,
+  lastName,
+  phoneNumber
+) => async (dispatch) => {
   try {
     const { user } = await auth.createUserWithEmailAndPassword(email, password);
+    if (user) {
+      await axios.post(`/api/users/`, {
+        uid: user.uid,
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+      });
+      await auth.signInWithEmailAndPassword(email, password);
+    }
     dispatch(setAuthConfirmation({ isLoggedIn: true, uid: user.uid }));
   } catch (err) {
     dispatch(setSignUpError(err.message));

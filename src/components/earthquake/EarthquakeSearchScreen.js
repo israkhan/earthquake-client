@@ -1,7 +1,6 @@
 import React from "react";
-import EarthquakeList from "./earthquake/EarthquakeList";
-import SearchBar from "./earthquake/SearchBar";
-import Map from "./map/Map";
+
+import { EarthquakeList, SearchBar, Map } from "../";
 
 const EarthquakeSearchScreen = (props) => {
   return (

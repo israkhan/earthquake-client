@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { Grid, Button, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { Grid, Button, TextField, Typography } from "@material-ui/core";
 
-import { getUser } from "../../store/user";
-import { signIn } from "../../store/auth";
+import { signIn } from "../../store";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = () => {
-    props.signIn(email, password);
-    props.fetchUser(props.uid);
+  const handleSignIn = async () => {
+    await props.signIn(email, password);
   };
 
   return (
@@ -52,9 +51,16 @@ const Login = (props) => {
         </Grid>
         <Grid item>
           {props.signInError && (
-            <Typography variant="body1">{props.signInError}</Typography>
+            <Typography variant="body1">
+              <br />
+              {props.signInError}
+            </Typography>
           )}
         </Grid>
+        <br />
+        <NavLink to="/signup" variant="body1">
+          <Typography variant="body1">Sign up instead</Typography>
+        </NavLink>
       </Grid>
     </div>
   );
@@ -66,7 +72,6 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchUser: (uid) => dispatch(getUser(uid)),
   signIn: (email, password) => dispatch(signIn(email, password)),
 });
 

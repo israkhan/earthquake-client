@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, MenuItem, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
+import { Button, MenuItem, TextField } from "@material-ui/core";
 
-import { getSearchResult } from "../../store/earthquakes";
+import { getSearchResult, createSubscription } from "../../store";
 
 const radiusOptions = [
   {
@@ -24,19 +24,24 @@ const radiusOptions = [
 ];
 
 const SearchBar = (props) => {
-  const [location, setLocation] = useState("Los Angeles, California");
+  const [location, setLocation] = useState("");
   const [radius, setRadius] = useState(25);
-  const [startDate, setStartDate] = useState("08/31/2020");
-  const [endDate, setEndDate] = useState("09/01/2020");
+  const [startDate, setStartDate] = useState("MM/DD/YYYY");
+  const [endDate, setEndDate] = useState("MM/DD/YYYY");
 
+  //TODO cache search query + results from lng lat conversions and reuse for handleSubscription
   const handleSearch = () => {
     props.search(location, radius, startDate, endDate);
   };
 
-  const styles = {
-    floatingLabelFocusStyle: {
-      color: "#3d405b",
-    },
+  const handleSubscription = () => {
+    props.subscribe({
+      location,
+      radius,
+      startDate,
+      endDate,
+      phoneNumber: props.user.phoneNumber,
+    });
   };
 
   return (
@@ -112,8 +117,8 @@ const SearchBar = (props) => {
             variant="contained"
             color="primary"
             margin="normal"
-            onClick={async () => {
-              await handleSearch();
+            onClick={() => {
+              handleSearch();
             }}
             style={{ backgroundColor: "#3d405b", margin: "5px" }}
           >
@@ -123,9 +128,10 @@ const SearchBar = (props) => {
             variant="contained"
             color="primary"
             margin="normal"
+            onClick={() => handleSubscription()}
             style={{ backgroundColor: "#3d405b", margin: "5px" }}
           >
-            Turn on SMS Notifications Me
+            Turn on SMS Notifications
           </Button>
         </div>
       </div>
@@ -133,9 +139,14 @@ const SearchBar = (props) => {
   );
 };
 
+const mapState = (state) => ({
+  user: state.user,
+});
+
 const mapDispatch = (dispatch) => ({
   search: (location, radius, start, end) =>
     dispatch(getSearchResult(location, radius, start, end)),
+  subscribe: (subscription) => dispatch(createSubscription(subscription)),
 });
 
-export default connect(null, mapDispatch)(SearchBar);
+export default connect(mapState, mapDispatch)(SearchBar);

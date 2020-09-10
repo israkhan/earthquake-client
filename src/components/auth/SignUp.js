@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Grid, Button, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Grid, Button, TextField, Typography } from "@material-ui/core";
 
-import { getUser } from "../store/user";
-import { signUp, signIn } from "../store/auth";
+import { signUp } from "../../store";
 
 const SignUp = (props) => {
   const [email, setEmail] = useState("");
@@ -12,16 +12,11 @@ const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const handleSubmit = () => {
-    props.signUp(email, password);
-    props.createUser({
-      uid: props.uid,
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-    });
-    props.signIn(email, password);
+  const history = useHistory();
+
+  const handleSubmit = async () => {
+    props.signUp(email, password, firstName, lastName, phoneNumber);
+    history.push("/");
   };
 
   return (
@@ -105,9 +100,8 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  createUser: (user) => dispatch(getUser(user)),
-  signUp: (email, password) => dispatch(signUp(email, password)),
-  signIn: (email, password) => dispatch(signIn(email, password)),
+  signUp: (email, password, firstName, lastName, phoneNumber) =>
+    dispatch(signUp(email, password, firstName, lastName, phoneNumber)),
 });
 
 export default connect(mapState, mapDispatch)(SignUp);

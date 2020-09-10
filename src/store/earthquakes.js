@@ -5,11 +5,15 @@ import axios from "axios";
  */
 const SET_EARTHQUAKE_SEARCH_RESULT = "SET_EARTHQUAKE_SEARCH_RESULT";
 
+const SET_EARTHQUAKE = "SET_EARTHQUAKE";
+
 /**
  * INITIAL STATE
  */
 const defaultState = {
   earthquakes: [],
+  earthquake: {},
+  queryGeoCode: {},
 };
 
 /**
@@ -20,6 +24,10 @@ const setEarthquakeSearchResult = (earthquakes) => ({
   earthquakes,
 });
 
+const setEarthquake = (earthquake) => ({
+  type: SET_EARTHQUAKE,
+  earthquake,
+});
 /**
  * THUNK CREATORS
  */
@@ -27,11 +35,27 @@ export const getSearchResult = (location, radius, start, end) => async (
   dispatch
 ) => {
   try {
-    const response = await axios(
+    const response = await axios.get(
       `/api/earthquakes/?location=${location}&radius=${radius}&startDate=${start}&endDate=${end}`
     );
+    const data = response.data;
 
-    dispatch(setEarthquakeSearchResult(response.data));
+    dispatch(setEarthquakeSearchResult(data));
+    data.earthquakes.forEach(async (quake) => {
+      await axios.post(`/api/earthquakes/`, quake);
+    });
+  } catch (err) {
+    console.error(err);
+    // dispatch(setQueryError(err.message));
+  }
+};
+
+export const getEarthquake = (id) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/earthquakes/${id}`);
+
+    const data = response.data;
+    dispatch(setEarthquake(data));
   } catch (err) {
     console.error(err);
     // dispatch(setQueryError(err.message));
@@ -44,7 +68,13 @@ export const getSearchResult = (location, radius, start, end) => async (
 export default function (state = defaultState, action) {
   switch (action.type) {
     case SET_EARTHQUAKE_SEARCH_RESULT:
-      return { earthquakes: action.earthquakes };
+      return {
+        ...state,
+        earthquakes: action.earthquakes.earthquakes,
+        queryGeoCode: action.earthquakes.geoCode,
+      };
+    case SET_EARTHQUAKE:
+      return { ...state, earthquake: action.earthquake };
     default:
       return state;
   }
