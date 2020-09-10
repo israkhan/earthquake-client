@@ -3,6 +3,7 @@ import { Button, MenuItem, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 
 import { getSearchResult } from "../../store/earthquakes";
+import { createSubscription } from "../../store/subscription";
 
 const radiusOptions = [
   {
@@ -29,8 +30,19 @@ const SearchBar = (props) => {
   const [startDate, setStartDate] = useState("08/31/2020");
   const [endDate, setEndDate] = useState("09/01/2020");
 
+  //TODO cache search query + results from lng lat conversions and reuse for handleSubscription
   const handleSearch = () => {
     props.search(location, radius, startDate, endDate);
+  };
+
+  const handleSubscription = () => {
+    props.subscribe({
+      location,
+      radius,
+      startDate,
+      endDate,
+      phoneNumber: props.user.phoneNumber,
+    });
   };
 
   const styles = {
@@ -112,8 +124,8 @@ const SearchBar = (props) => {
             variant="contained"
             color="primary"
             margin="normal"
-            onClick={async () => {
-              await handleSearch();
+            onClick={() => {
+              handleSearch();
             }}
             style={{ backgroundColor: "#3d405b", margin: "5px" }}
           >
@@ -123,6 +135,7 @@ const SearchBar = (props) => {
             variant="contained"
             color="primary"
             margin="normal"
+            onClick={() => handleSubscription()}
             style={{ backgroundColor: "#3d405b", margin: "5px" }}
           >
             Turn on SMS Notifications Me
@@ -133,9 +146,14 @@ const SearchBar = (props) => {
   );
 };
 
+const mapState = (state) => ({
+  user: state.user,
+});
+
 const mapDispatch = (dispatch) => ({
   search: (location, radius, start, end) =>
     dispatch(getSearchResult(location, radius, start, end)),
+  subscribe: (subscription) => dispatch(createSubscription(subscription)),
 });
 
-export default connect(null, mapDispatch)(SearchBar);
+export default connect(mapState, mapDispatch)(SearchBar);

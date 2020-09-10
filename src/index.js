@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { Router } from "react-router-dom";
+import Routes from "./Routes";
 
 import App from "./components/App";
 import history from "./history";
@@ -9,9 +9,9 @@ import store from "./store/index";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Routes>
       <App />
-    </Router>
+    </Routes>
   </Provider>,
   document.getElementById("root")
 );

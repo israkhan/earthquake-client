@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { Grid, Button, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
-
-import { getUser } from "../../store/user";
+import { Link } from "react-router-dom";
 import { signIn } from "../../store/auth";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = () => {
-    props.signIn(email, password);
-    props.fetchUser(props.uid);
+  const handleSignIn = async () => {
+    await props.signIn(email, password);
   };
 
   return (
@@ -55,6 +53,8 @@ const Login = (props) => {
             <Typography variant="body1">{props.signInError}</Typography>
           )}
         </Grid>
+
+        <Link to={`/signup`}> Sign up instead </Link>
       </Grid>
     </div>
   );
@@ -66,7 +66,6 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchUser: (uid) => dispatch(getUser(uid)),
   signIn: (email, password) => dispatch(signIn(email, password)),
 });
 
