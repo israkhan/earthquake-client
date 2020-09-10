@@ -12,7 +12,7 @@ const EarthquakeItem = (props) => {
   const time = new Date(earthProps.time).toDateString();
   const [, location] = earthProps.place.split("of ");
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" style={{ backgroundColor: "#f4f1de" }}>
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
           {time}

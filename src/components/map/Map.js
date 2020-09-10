@@ -1,7 +1,6 @@
 import React from "react";
 import { Map as LeafletMap, TileLayer } from "react-leaflet";
 import { connect } from "react-redux";
-import { Typography } from "@material-ui/core";
 import Marker from "./Marker";
 
 const Map = (props) => {
