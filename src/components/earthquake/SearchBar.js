@@ -45,12 +45,6 @@ const SearchBar = (props) => {
     });
   };
 
-  const styles = {
-    floatingLabelFocusStyle: {
-      color: "#3d405b",
-    },
-  };
-
   return (
     <div
       style={{

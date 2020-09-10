@@ -5,8 +5,12 @@ import NavBar from "./NavBar";
 import { getUser } from "../store/user";
 
 function Home(props) {
-  useEffect(async () => {
+  const fetchData = async () => {
     await props.fetchUser(props.uid);
+  };
+
+  useEffect(() => {
+    fetchData();
   });
 
   return (

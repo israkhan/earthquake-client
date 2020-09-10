@@ -1,10 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import Login from "./auth/Login";
-import Home from "./Home";
+
+import Route from "../Routes";
 
 function App(props) {
-  return <div className="App">{props.isLoggedIn ? <Home /> : <Login />}</div>;
+  return (
+    <div className="App">
+      <Route />
+    </div>
+  );
 }
 
 const mapState = (state) => ({

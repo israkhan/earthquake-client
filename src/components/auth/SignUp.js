@@ -3,8 +3,7 @@ import { Grid, Button, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { createUser } from "../../store/user";
-import { signUp, signIn } from "../../store/auth";
+import { signUp } from "../../store/auth";
 
 const SignUp = (props) => {
   const [email, setEmail] = useState("");
@@ -13,12 +12,12 @@ const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  const history = useHistory();
+
   const handleSubmit = async () => {
     props.signUp(email, password, firstName, lastName, phoneNumber);
     history.push("/");
   };
-
-  const history = useHistory();
 
   return (
     <Grid

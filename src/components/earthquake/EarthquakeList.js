@@ -1,5 +1,4 @@
 import React from "react";
-import { GridList, GridListTile } from "@material-ui/core";
 import { connect } from "react-redux";
 
 import EarthquakeItem from "./EarthquakeItem";

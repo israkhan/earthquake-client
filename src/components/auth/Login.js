@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Grid, Button, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { signIn } from "../../store/auth";
+import { NavLink } from "react-router-dom";
+import { signIn } from "../../store";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -53,8 +53,11 @@ const Login = (props) => {
             <Typography variant="body1">{props.signInError}</Typography>
           )}
         </Grid>
-
-        <Link to={`/signup`}> Sign up instead </Link>
+        <br />
+        <NavLink to="/signup" variant="body1">
+          {" "}
+          Sign up instead{" "}
+        </NavLink>
       </Grid>
     </div>
   );
