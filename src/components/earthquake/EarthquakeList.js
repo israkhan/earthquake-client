@@ -6,13 +6,11 @@ import EarthquakeItem from "./EarthquakeItem";
 
 const EarthquakeList = (props) => {
   return (
-    <GridList cellHeight={160} cols={1}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       {props.earthquakes.map((quake) => (
-        <GridListTile key={quake.id}>
-          <EarthquakeItem key={quake.id} quake={quake} />
-        </GridListTile>
+        <EarthquakeItem key={quake.id} quake={quake} />
       ))}
-    </GridList>
+    </div>
   );
 };
 
