@@ -51,13 +51,15 @@ const Login = (props) => {
         </Grid>
         <Grid item>
           {props.signInError && (
-            <Typography variant="body1">{props.signInError}</Typography>
+            <Typography variant="body1">
+              <br />
+              {props.signInError}
+            </Typography>
           )}
         </Grid>
         <br />
         <NavLink to="/signup" variant="body1">
-          {" "}
-          Sign up instead{" "}
+          <Typography variant="body1">Sign up instead</Typography>
         </NavLink>
       </Grid>
     </div>

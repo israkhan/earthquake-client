@@ -131,7 +131,7 @@ const SearchBar = (props) => {
             onClick={() => handleSubscription()}
             style={{ backgroundColor: "#3d405b", margin: "5px" }}
           >
-            Turn on SMS Notifications Me
+            Turn on SMS Notifications
           </Button>
         </div>
       </div>

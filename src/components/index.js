@@ -5,6 +5,7 @@ import AddReportModal from "./earthquake/AddReportModal";
 import EarthquakeDetails from "./earthquake/EarthquakeDetails";
 import EarthquakeItem from "./earthquake/EarthquakeItem";
 import EarthquakeList from "./earthquake/EarthquakeList";
+import EarthquakeListPagination from "./earthquake/EarthquakeListPagination";
 import EarthquakeSearchScreen from "./earthquake/EarthquakeSearchScreen";
 import SearchBar from "./earthquake/SearchBar";
 
@@ -23,6 +24,7 @@ export {
   EarthquakeDetails,
   EarthquakeItem,
   EarthquakeList,
+  EarthquakeListPagination,
   EarthquakeSearchScreen,
   SearchBar,
   Map,
